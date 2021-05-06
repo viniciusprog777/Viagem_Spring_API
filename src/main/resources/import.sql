@@ -16,3 +16,5 @@ INSERT INTO destino values (400, '2022-02-15', "Teste", "Copacabana", 7600, 3);
 INSERT INTO destino values (500, '2029-02-15', "Teste", "Copacabana", 78700, 3);
 
 
+INSERT INTO foto values (1, true, "https://i.pinimg.com/564x/3b/86/f6/3b86f6547d252903984d84860adbd876.jpg", 100)
+INSERT INTO foto values (2, true, "https://www.infoescola.com/wp-content/uploads/2019/10/paisagem-ouro-preto-1008049370.jpg", 200)

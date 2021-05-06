@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.viagem.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.senai.sp.jandira.viagem.dto.DestinosRecentesDTO;
 import br.senai.sp.jandira.viagem.model.Destino;
 import br.senai.sp.jandira.viagem.repository.DestinoRepository;
 
@@ -24,8 +26,25 @@ public class DestinoController {
 	private DestinoRepository destinoRepository;
 
 	@GetMapping("/destinos")
-	private List<Destino> getAll() {
-		return destinoRepository.findAll();
+	private List<DestinosRecentesDTO> getAll() {
+		
+		List<Destino> destinos = new ArrayList<>();
+		
+		List<DestinosRecentesDTO> destinosRecentes = new ArrayList<>();
+
+		
+		destinos = destinoRepository.findAll();
+		
+		for (Destino d : destinos) {
+			DestinosRecentesDTO dDTO = new DestinosRecentesDTO();
+			dDTO.setId(d.getId());
+			dDTO.setNome(d.getNome());
+			dDTO.setValor(d.getValor());
+			dDTO.setNomeCidade(d.getCidade().getNome());
+			dDTO.setSiglaCidade(d.getCidade().getEstado().getSigla());
+			destinosRecentes.add(dDTO);
+		}
+		return destinosRecentes;
 	}
 
 	@GetMapping("/destinos/{id}")

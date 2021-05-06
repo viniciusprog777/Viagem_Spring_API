@@ -1,6 +1,8 @@
 package br.senai.sp.jandira.viagem.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Destino {
@@ -27,6 +32,10 @@ public class Destino {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Cidade cidade;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "destino")
+	private List<Foto> fotos = new ArrayList<Foto>();
 
 	public Long getId() {
 		return id;
@@ -74,6 +83,14 @@ public class Destino {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
 	}
 
 }
